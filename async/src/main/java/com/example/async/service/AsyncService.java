@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class AsyncService {
 
-	@Async
+	@Async("async-thread")
 	public CompletableFuture run() {
 		return new AsyncResult(hello()).completable();
 	}
