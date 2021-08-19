@@ -1,6 +1,9 @@
 package com.example.async.service;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +13,12 @@ import lombok.extern.slf4j.Slf4j;
 public class AsyncService {
 
 	@Async
-	public void hello() {
+	public CompletableFuture run() {
+		return new AsyncResult(hello()).completable();
+	}
+	
+	
+	public String hello() {
 		
 		for(int i = 0; i < 10; i ++) {
 			try {
@@ -20,6 +28,8 @@ public class AsyncService {
 				e.printStackTrace();
 			}
 		}
+		
+		return "async hello";
 	}
 
 }
